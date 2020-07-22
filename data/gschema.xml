@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/io/github/myteam/myapp/" id="io.github.myteam.myapp">
+    <key name="useless-setting" type="b">
+      <default>false</default>
+      <summary>Useless Setting</summary>
+      <description>Whether the switch is toggled</description>
+    </key>
+  </schema>
+</schemalist>

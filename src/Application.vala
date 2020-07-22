@@ -16,13 +16,22 @@ public class MyApp : Gtk.Application {
             show_title_buttons = true
         };
 
+        var useless_switch = new Gtk.Switch () {
+            halign = Gtk.Align.CENTER,
+            valign = Gtk.Align.CENTER
+        };
+
         var main_window = new Gtk.ApplicationWindow (this) {
+            child = useless_switch,
             default_height = 300,
             default_width = 300,
             title = "MyApp",
             titlebar = headerbar
         };
         main_window.present ();
+
+        var settings = new Settings (application_id);
+        settings.bind ("useless-setting", useless_switch, "active", SettingsBindFlags.DEFAULT);
     }
 
     public static int main (string[] args) {
