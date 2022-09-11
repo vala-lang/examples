@@ -27,21 +27,15 @@ public class MyApp : Gtk.Application {
         );
     }
 
-	private Gtk.ApplicationWindow main_window;
+    public override void startup () {
+        base.startup ();
 
-	public override void startup () {
-		base.startup ();
+        var quit_action = new SimpleAction ("quit", null);
 
-		var quit_action = new SimpleAction ("quit", null);
-
-		add_action (quit_action);
-		set_accels_for_action ("app.quit",  {"<Control>q", "<Control>w"});
-		quit_action.activate.connect (() => {
-			if (main_window != null) {
-				main_window.destroy ();
-			}
-		});
-	}
+        add_action (quit_action);
+        set_accels_for_action ("app.quit",  {"<Control>q", "<Control>w"});
+        quit_action.activate.connect (quit);
+    }
 
     protected override void activate () {
         var button = new Gtk.Button.from_icon_name ("process-stop", Gtk.IconSize.LARGE_TOOLBAR) {
@@ -57,7 +51,7 @@ public class MyApp : Gtk.Application {
         };
         headerbar.add (button);
 
-        main_window = new Gtk.ApplicationWindow (this) {
+        var main_window = new Gtk.ApplicationWindow (this) {
             default_height = 300,
             default_width = 300,
             title = "Actions"
