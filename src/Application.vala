@@ -27,12 +27,17 @@ public class MyApp : Gtk.Application {
         );
     }
 
-    protected override void activate () {
+    public override void startup () {
+        base.startup ();
+
         var quit_action = new SimpleAction ("quit", null);
 
         add_action (quit_action);
         set_accels_for_action ("app.quit",  {"<Control>q", "<Control>w"});
+        quit_action.activate.connect (quit);
+    }
 
+    protected override void activate () {
         var button = new Gtk.Button.from_icon_name ("process-stop", Gtk.IconSize.LARGE_TOOLBAR) {
             action_name = "app.quit",
             tooltip_markup = Granite.markup_accel_tooltip (
@@ -53,10 +58,6 @@ public class MyApp : Gtk.Application {
         };
         main_window.set_titlebar (headerbar);
         main_window.show_all ();
-
-        quit_action.activate.connect (() => {
-            main_window.destroy ();
-        });
     }
 
     public static int main (string[] args) {
