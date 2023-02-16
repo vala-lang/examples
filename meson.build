@@ -22,6 +22,6 @@ install_data(
 # Install our .appdata.xml file so AppCenter will see it
 install_data(
     'data' / 'myapp.appdata.xml',
-    install_dir: get_option('datadir') / 'metainfo')
+    install_dir: get_option('datadir') / 'metainfo',
     rename: meson.project_name() + '.appdata.xml'
 )
