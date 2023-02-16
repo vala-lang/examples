@@ -38,26 +38,27 @@ public class MyApp : Gtk.Application {
     }
 
     protected override void activate () {
-        var button = new Gtk.Button.from_icon_name ("process-stop", Gtk.IconSize.LARGE_TOOLBAR) {
+        var button = new Gtk.Button.from_icon_name ("process-stop") {
             action_name = "app.quit",
             tooltip_markup = Granite.markup_accel_tooltip (
                 get_accels_for_action ("app.quit"),
                 "Quit"
             )
         };
+        button.add_css_class (Granite.STYLE_CLASS_LARGE_ICONS);
 
         var headerbar = new Gtk.HeaderBar () {
-            show_close_button = true
+            show_title_buttons = true
         };
-        headerbar.add (button);
+        headerbar.pack_start (button);
 
         var main_window = new Gtk.ApplicationWindow (this) {
             default_height = 300,
             default_width = 300,
-            title = "Actions"
+            title = "Actions",
+            titlebar = headerbar
         };
-        main_window.set_titlebar (headerbar);
-        main_window.show_all ();
+        main_window.present ();
     }
 
     public static int main (string[] args) {
