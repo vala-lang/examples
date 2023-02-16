@@ -15,7 +15,6 @@ command: io.github.myteam.myapp
 # ​Here we can specify the kinds of permissions our app needs to run. Since we're
 # not using hardware like webcams, making sound, or reading external files, we
 # only need permission to draw our app on screen using either X11 or Wayland.
-
 finish-args:
   - '--share=ipc'
   - '--socket=fallback-x11'
@@ -24,7 +23,6 @@ finish-args:
 # This section is where you list all the source code required to build your app.
 # If we had external dependencies that weren't included in our SDK, we would list
 # them here.
-
 modules:
   - name: myapp
     buildsystem: meson
