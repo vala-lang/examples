@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=MyApp
+Comment=A catchy tagline
+Categories=Education;ComputerScience;
+
+Icon=io.github.myteam.myapp
+Exec=io.github.myteam.myapp
+Terminal=false
+
+Actions=quit;
+DBusActivatable=true
+
+[Desktop Action quit]
+Name=Quit
+Icon=process-stop
+Exec=io.github.myteam.myapp
