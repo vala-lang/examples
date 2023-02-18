@@ -15,4 +15,5 @@ DBusActivatable=true
 
 [Desktop Action quit]
 Name=Quit
+Icon=process-stop
 Exec=io.github.myteam.myapp
