@@ -9,3 +9,4 @@ Categories=Education;ComputerScience;
 Icon=io.github.myteam.myapp
 Exec=io.github.myteam.myapp
 Terminal=false
+X-GNOME-UsesNotifications=true
