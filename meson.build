@@ -26,13 +26,6 @@ install_data(
     rename: meson.project_name() + '.appdata.xml'
 )
 
-# Install D-Bus service, so that application can be started by D-Bus
-install_data(
-    'data' / 'myapp.service',
-    install_dir: get_option('datadir') / 'dbus-1' / 'services',
-    rename: meson.project_name() + '.service',
-)
-
 # Install our icons in all the required sizes
 icon_sizes = ['16', '24', '32', '48', '64', '128']
 foreach i : icon_sizes

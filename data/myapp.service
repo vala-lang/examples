@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=io.github.myteam.myapp
-Exec=io.github.myteam.myapp --gapplication-service

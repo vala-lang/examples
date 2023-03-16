@@ -22,27 +22,45 @@ public class MyApp : Gtk.Application {
     }
 
     protected override void activate () {
-        var button = new Gtk.Button.from_icon_name ("process-stop") {
-            action_name = "app.quit",
-            tooltip_markup = Granite.markup_accel_tooltip (
-                get_accels_for_action ("app.quit"),
-                "Quit"
-            )
-        };
-        button.add_css_class (Granite.STYLE_CLASS_LARGE_ICONS);
-
         var headerbar = new Gtk.HeaderBar () {
             show_title_buttons = true
         };
-        headerbar.pack_start (button);
+
+        var secondary_click_gesture = new Gtk.GestureClick () {
+            button = Gdk.BUTTON_SECONDARY
+        };
+
+        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
+        box.add_controller (secondary_click_gesture);
+
+        var menu = new Menu ();
+        menu.append ("Quit", "app.quit");
+
+        var popover = new Gtk.PopoverMenu.from_model (menu) {
+            halign = Gtk.Align.START,
+            has_arrow = false,
+            position = Gtk.PositionType.BOTTOM
+        };
+        popover.set_parent (box);
 
         var main_window = new Gtk.ApplicationWindow (this) {
+            child = box,
             default_height = 300,
             default_width = 300,
-            title = "Actions",
+            title = "MyApp",
             titlebar = headerbar
         };
         main_window.present ();
+
+        secondary_click_gesture.released.connect ((n_press, x, y) => {
+            var rect = Gdk.Rectangle () {
+                x = (int) x,
+                y = (int) y
+            };
+
+            popover.pointing_to = rect;
+            popover.popup ();
+        });
     }
 
     public static int main (string[] args) {
