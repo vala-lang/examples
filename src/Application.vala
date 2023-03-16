@@ -22,9 +22,31 @@ public class MyApp : Gtk.Application {
     }
 
     protected override void activate () {
+        var quit_button = new Gtk.Button () {
+            action_name = "app.quit",
+            child = new Granite.AccelLabel.from_action_name ("Quit", "app.quit")
+        };
+        quit_button.add_css_class (Granite.STYLE_CLASS_MENUITEM);
+
+        var popover_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        popover_box.append (quit_button);
+
+        var popover = new Gtk.Popover () {
+            child = popover_box
+        };
+        popover.add_css_class (Granite.STYLE_CLASS_MENU);
+
+        var menu_button = new Gtk.MenuButton () {
+            icon_name = "open-menu",
+            popover = popover,
+            primary = true
+        };
+        menu_button.add_css_class (Granite.STYLE_CLASS_LARGE_ICONS);
+
         var headerbar = new Gtk.HeaderBar () {
             show_title_buttons = true
         };
+        headerbar.pack_end (menu_button);
 
         var secondary_click_gesture = new Gtk.GestureClick () {
             button = Gdk.BUTTON_SECONDARY
@@ -36,12 +58,12 @@ public class MyApp : Gtk.Application {
         var menu = new Menu ();
         menu.append ("Quit", "app.quit");
 
-        var popover = new Gtk.PopoverMenu.from_model (menu) {
+        var popover_menu = new Gtk.PopoverMenu.from_model (menu) {
             halign = Gtk.Align.START,
             has_arrow = false,
             position = Gtk.PositionType.BOTTOM
         };
-        popover.set_parent (box);
+        popover_menu.set_parent (box);
 
         var main_window = new Gtk.ApplicationWindow (this) {
             child = box,
@@ -58,8 +80,8 @@ public class MyApp : Gtk.Application {
                 y = (int) y
             };
 
-            popover.pointing_to = rect;
-            popover.popup ();
+            popover_menu.pointing_to = rect;
+            popover_menu.popup ();
         });
     }
 
