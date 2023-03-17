@@ -28,18 +28,16 @@ public class MyApp : Gtk.Application {
         };
         quit_button.add_css_class (Granite.STYLE_CLASS_MENUITEM);
 
-        var popover_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        popover_box.append (quit_button);
-
         var popover = new Gtk.Popover () {
-            child = popover_box
+            child = quit_button
         };
         popover.add_css_class (Granite.STYLE_CLASS_MENU);
 
         var menu_button = new Gtk.MenuButton () {
             icon_name = "open-menu",
             popover = popover,
-            primary = true
+            primary = true,
+            tooltip_markup = Granite.markup_accel_tooltip ({"F10"}, "Menu")
         };
         menu_button.add_css_class (Granite.STYLE_CLASS_LARGE_ICONS);
 
