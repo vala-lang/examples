@@ -1,0 +1,3 @@
+// The values put inside "@" are replaced in accordance with the configuration data by meson
+public const string GETTEXT_PACKAGE = @GETTEXT_PACKAGE@;
+public const string LOCALEDIR = @LOCALEDIR@;
